@@ -54,7 +54,7 @@ plt.rcParams['font.family']     = 'Arial'
 # .............................................................................
 datagen = ImageDataGenerator()
 
-test_it = datagen.flow_from_directory(test_folder, target_size=(IMG_SIZE,IMG_SIZE), class_mode='categorical', batch_size=batch_size)
+test_it = datagen.flow_from_directory(test_folder, target_size=(IMG_SIZE,IMG_SIZE), class_mode='categorical', batch_size=batch_size, shuffle=False)
 
 filepath        = os.path.join(output_folder, modelname + ".hdf5")
 loss_epoch_file = os.path.join(output_folder, modelname +'.csv')
@@ -82,14 +82,31 @@ print("number of examples: {0}".format(number_of_examples))
 number_of_generator_calls = math.ceil(number_of_examples / (1.0 * batch_size)) 
 print("number of generator calls: {0}".format(number_of_generator_calls))
 # 1.0 above is to skip integer division
-
-for i in range(0,int(number_of_generator_calls)):
-  tsLbl.extend(np.array(test_it[i][1]))
+files = []
+for i in range(0,int(number_of_generator_calls)): 
+  fn = test_it.filenames[i*batch_size:(i+1)*batch_size]
+  lbls = test_it[i][1]
+  files.extend(np.array(fn))
+  tsLbl.extend(np.array(lbls))
    
 tsLbl = np.asarray(tsLbl, dtype=np.float32)
 predout = np.argmax(predict, axis=1)
 testout = np.argmax(tsLbl, axis = 1)
 labelname = classes
+
+final = []
+for i in range(0, len(files)):
+  tup = [files[i], testout[i], predout[i]]
+  final.append(tup)
+  #print(tup)
+pred_csv = os.path.join(output_folder, modelname + "_prediction.csv")
+import csv
+
+with open(pred_csv, 'w') as csv_file:
+    writer = csv.writer(csv_file, delimiter=',')
+    writer.writerow(["filename", "actual", "predicted"])
+    for r in final:
+      writer.writerow(r)
 
 testScores = metrics.accuracy_score(testout,predout)
 confusion = metrics.confusion_matrix(testout, predout)
