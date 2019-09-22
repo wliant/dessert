@@ -31,7 +31,7 @@ import os
 
 test_folder = '../uncropped/validate'
 
-output_folder = 'test-output'
+output_folder = 'output'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
 batch_size = 32
 IMG_SIZE = 299
