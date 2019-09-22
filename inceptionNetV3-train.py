@@ -29,7 +29,7 @@ import os
 
 
 train_folder = '../uncropped/train'
-val_folder = '../cropped/validate'
+val_folder = '../uncropped/validate'
 
 output_folder = 'output'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
@@ -87,4 +87,4 @@ plot_model(model,
 
 model.fit_generator(train_it, validation_data=val_it,epochs=50,callbacks=callbacks_list)
 
-model.save(saved_model)
+#model.save(saved_model)

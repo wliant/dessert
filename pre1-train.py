@@ -102,4 +102,4 @@ plot_model(model,
            show_layer_names=False,
            rankdir='TB')
 # fit model
-model.fit_generator(train_it, validation_data=val_it,epochs=200,callbacks=callbacks_list)
+model.fit_generator(train_it, validation_data=val_it,epochs=50,callbacks=callbacks_list)
