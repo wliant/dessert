@@ -24,7 +24,7 @@ from tensorflow.keras.datasets import cifar10
 from tensorflow.keras import optimizers
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.applications.inception_v3 import InceptionV3
+from tensorflow.keras.applications.resnet50 import ResNet50
 import os
 
 
@@ -37,7 +37,7 @@ batch_size = 32
 IMG_SIZE = 299
 seed = 7
 np.random.seed(seed)
-modelname = 'invceptionNetV1'
+modelname = 'resnet50'
 
 def implt(img):
     plt.figure()
