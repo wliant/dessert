@@ -34,10 +34,10 @@ test_folder = '../cropped/validate'
 output_folder = 'output-crop'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
 batch_size = 32
-IMG_SIZE = 299
+IMG_SIZE = 224
 seed = 7
 np.random.seed(seed)
-modelname = 'resnet50'
+modelname = 'vgg-16'
 
 def implt(img):
     plt.figure()
@@ -63,8 +63,30 @@ plt_file = os.path.join(output_folder, modelname + '_plot.png')
 print(filepath)
 print(loss_epoch_file)
 
-
-modelGo = InceptionV3(include_top=True,input_shape=(IMG_SIZE,IMG_SIZE,3),weights=None,classes=4)
+def vgg_block(layer_in, n_filters, n_conv):
+    for _ in range(n_conv):
+          layer_in = Conv2D(n_filters, (3,3), padding='same', activation='relu')(layer_in)
+    layer_in = MaxPooling2D((2,2), strides=(2,2))(layer_in)
+    return layer_in
+    
+def createModel():
+    visible = Input(shape=(IMG_SIZE,IMG_SIZE,3))
+    layer = vgg_block(visible,64,2)
+    layer = vgg_block(layer, 128, 2)
+    layer = vgg_block(layer, 256, 2)
+    layer = vgg_block(layer, 512, 3)
+    layer = vgg_block(layer, 512, 3)
+    layer = Flatten()(layer)
+    layer = Dense(4096, activation='relu')(layer)
+    layer = Dense(4096, activation='relu')(layer)
+    layer = Dense(4, activation='softmax')(layer)
+    model = Model(inputs=visible, outputs=layer)
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    
+    return model
+  
+  # define model
+modelGo = createModel()
 modelGo.load_weights(filepath)
 modelGo.compile(loss='categorical_crossentropy', 
                 optimizer='adam', 

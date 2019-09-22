@@ -34,7 +34,7 @@ test_folder = '../cropped/validate'
 output_folder = 'output-crop'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
 batch_size = 32
-IMG_SIZE = 299
+IMG_SIZE = 227
 seed = 7
 np.random.seed(seed)
 modelname = 'alex'
@@ -63,8 +63,28 @@ plt_file = os.path.join(output_folder, modelname + '_plot.png')
 print(filepath)
 print(loss_epoch_file)
 
-
-modelGo = InceptionV3(include_top=True,input_shape=(IMG_SIZE,IMG_SIZE,3),weights=None,classes=4)
+#---- model creation code
+def createModel():
+    visible = Input(shape=(IMG_SIZE,IMG_SIZE,3))
+    layer = Conv2D(96, 11, 4, activation='relu')(visible)
+    layer = MaxPooling2D((3,3), 2)(layer)
+    layer = Conv2D(256, 5, activation='relu', padding='same')(layer)
+    layer = MaxPooling2D((3,3), 2)(layer)
+    layer = Conv2D(384, 3, activation='relu', padding='same')(layer)
+    layer = Conv2D(384, 3, activation='relu', padding='same')(layer)
+    layer = Conv2D(256, 3, activation='relu', padding='same')(layer)
+    layer = MaxPooling2D((3,3), 2)(layer)
+    layer = Flatten()(layer)
+    layer = Dense(4096, activation='relu')(layer)
+    layer = Dense(4096, activation='relu')(layer)
+    layer = Dense(4, activation='softmax')(layer)
+    model = Model(inputs=visible, outputs=layer)
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    
+    return model
+  
+  # define model
+modelGo = createModel()
 modelGo.load_weights(filepath)
 modelGo.compile(loss='categorical_crossentropy', 
                 optimizer='adam', 

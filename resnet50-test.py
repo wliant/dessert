@@ -24,7 +24,7 @@ from tensorflow.keras.datasets import cifar10
 from tensorflow.keras import optimizers
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.applications.inception_v3 import InceptionV3
+from tensorflow.keras.applications.resnet50 import ResNet50
 import os
 
 
@@ -64,7 +64,7 @@ print(filepath)
 print(loss_epoch_file)
 
 
-modelGo = InceptionV3(include_top=True,input_shape=(IMG_SIZE,IMG_SIZE,3),weights=None,classes=4)
+modelGo = ResNet50(include_top=True, weights=None, input_tensor=None, input_shape=(IMG_SIZE,IMG_SIZE,3), classes=4)
 modelGo.load_weights(filepath)
 modelGo.compile(loss='categorical_crossentropy', 
                 optimizer='adam', 
