@@ -25,9 +25,7 @@ from tensorflow.keras import optimizers
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.applications.resnet50 import ResNet50
-from google.colab import drive
 import os
-drive.mount('/content/gdrive')
 
 # ----- declare some constant
 
