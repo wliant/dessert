@@ -28,10 +28,10 @@ from tensorflow.keras.models import Sequential
 import os
 
 
-train_folder = '../uncropped/train'
+train_folder = '../cropped/train'
 val_folder = '../cropped/validate'
 
-output_folder = 'output'
+output_folder = 'output-crop'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
 batch_size = 32
 IMG_SIZE = 224
@@ -104,4 +104,4 @@ plot_model(model,
            rankdir='TB')
 
 # fit model
-model.fit_generator(train_it, validation_data=val_it,epochs=200,callbacks=callbacks_list)
+model.fit_generator(train_it, validation_data=val_it,epochs=50,callbacks=callbacks_list)

@@ -28,10 +28,10 @@ import os
 
 # ----- declare some constant
 
-train_folder = '../uncropped/train'
-val_folder = '../uncropped/validate'
+train_folder = '../cropped/train'
+val_folder = '../cropped/validate'
 
-output_folder = 'output'
+output_folder = 'output-crop'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
 batch_size = 32
 IMG_SIZE = 227

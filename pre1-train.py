@@ -28,10 +28,10 @@ import os
 
 # ----- declare some constant
 
-train_folder = '../uncropped/train'
-val_folder = '../uncropped/validate'
+train_folder = '../cropped/train'
+val_folder = '../cropped/validate'
 
-output_folder = 'output'
+output_folder = 'output-crop'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
 batch_size = 32
 IMG_SIZE = 300
@@ -102,4 +102,4 @@ plot_model(model,
            show_layer_names=False,
            rankdir='TB')
 # fit model
-model.fit_generator(train_it, validation_data=val_it,epochs=200,callbacks=callbacks_list)
+model.fit_generator(train_it, validation_data=val_it,epochs=50,callbacks=callbacks_list)
