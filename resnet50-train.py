@@ -89,7 +89,7 @@ plot_model(model,
 
 model.fit_generator(train_it, validation_data=val_it,epochs=50,callbacks=callbacks_list)
 
-tf.keras.models.save_model(
+tensorflow.keras.models.save_model(
     model,
     saved_model,
     overwrite=True,
