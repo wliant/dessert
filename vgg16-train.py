@@ -36,7 +36,7 @@ output_folder = 'output'
 batch_size = 32
 IMG_SIZE = 224
 #seed = 7
-np.random.seed(seed)
+#np.random.seed(seed)
 modelname = 'vgg-16'
 
 def implt(img):
