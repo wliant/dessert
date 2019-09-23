@@ -33,7 +33,7 @@ val_folder = '../uncropped/validate'
 
 output_folder = 'output'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
-batch_size = 32
+batch_size = 16
 IMG_SIZE = 299
 
 
@@ -85,6 +85,6 @@ plot_model(model,
            rankdir='TB')
 # fit model
 
-model.fit_generator(train_it, validation_data=val_it,epochs=50,callbacks=callbacks_list)
+#model.fit_generator(train_it, validation_data=val_it,epochs=50,callbacks=callbacks_list)
 
 #model.save(saved_model)
