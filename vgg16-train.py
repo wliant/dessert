@@ -80,7 +80,7 @@ def createModel():
     visible = Input(shape=(IMG_SIZE,IMG_SIZE,3))
     layer = vgg_block(visible,64,2)
     layer = vgg_block(layer, 128, 2)
-    layer = vgg_block(layer, 256, 2)
+    layer = vgg_block(layer, 256, 3)
     layer = vgg_block(layer, 512, 3)
     layer = vgg_block(layer, 512, 3)
     layer = Flatten()(layer)
