@@ -47,7 +47,7 @@ plt.rcParams['ytick.labelright']= True
 plt.rcParams['ytick.left']      = False
 plt.rcParams['ytick.labelleft'] = False
 plt.rcParams['font.family']     = 'Arial'
-modelname = 'ca2-v1.00'
+modelname = 'ca2-v2'
 seed = 7
 np.random.seed(seed)
 
