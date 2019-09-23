@@ -1,0 +1,5 @@
+run.sh
+test.sh
+output/*
+output-crop/*
+test-crop.sh
