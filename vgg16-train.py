@@ -55,8 +55,8 @@ plt.rcParams['font.family']     = 'Arial'
 datagen = ImageDataGenerator()
 
 
-train_it = datagen.flow_from_directory(train_folder, shuffle=True, target_size=(IMG_SIZE,IMG_SIZE), classes=classes, class_mode='categorical', batch_size=batch_size)
-val_it = datagen.flow_from_directory(val_folder, shuffle=True, target_size=(IMG_SIZE,IMG_SIZE), classes=classes, class_mode='categorical', batch_size=batch_size)
+train_it = datagen.flow_from_directory(train_folder, shuffle=True, target_size=(IMG_SIZE,IMG_SIZE), class_mode='categorical', batch_size=batch_size)
+val_it = datagen.flow_from_directory(val_folder, shuffle=True, target_size=(IMG_SIZE,IMG_SIZE), class_mode='categorical', batch_size=batch_size)
 
 
 filepath        = os.path.join(output_folder, modelname + ".hdf5")
