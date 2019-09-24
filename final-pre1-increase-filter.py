@@ -87,6 +87,7 @@ def createModel():
     layer = Dropout(0.2)(layer)
     layer = Flatten()(layer)
     layer = Dense(128, activation='relu')(layer)
+    layer = Dropout(0.3)(layer)
     layer = Dense(128, activation='relu')(layer)
     layer = Dense(4, activation = 'softmax')(layer)
     model = Model(inputs=i, outputs=layer)
