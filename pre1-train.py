@@ -47,7 +47,7 @@ plt.rcParams['ytick.labelright']= True
 plt.rcParams['ytick.left']      = False
 plt.rcParams['ytick.labelleft'] = False
 plt.rcParams['font.family']     = 'Arial'
-modelname = 'pre-4'
+modelname = 'pre-5'
 seed = 7
 np.random.seed(seed)
 
@@ -104,4 +104,4 @@ plot_model(model,
            show_layer_names=False,
            rankdir='TB')
 # fit model
-model.fit_generator(train_it, validation_data=val_it,epochs=50,callbacks=callbacks_list)
+model.fit_generator(train_it, validation_data=val_it,epochs=100,callbacks=callbacks_list)

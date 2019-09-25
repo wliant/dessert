@@ -37,7 +37,7 @@ batch_size = 32
 IMG_SIZE = 300
 seed = 7
 np.random.seed(seed)
-modelname = 'pre-4'
+modelname = 'pre-5'
 
 def implt(img):
     plt.figure()
