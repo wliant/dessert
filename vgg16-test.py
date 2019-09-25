@@ -70,21 +70,35 @@ def vgg_block(layer_in, n_filters, n_conv):
     layer_in = MaxPooling2D((2,2), strides=(2,2))(layer_in)
     return layer_in
     
+    
 def createModel():
-    visible = Input(shape=(IMG_SIZE,IMG_SIZE,3))
-    layer = vgg_block(visible,64,2)
-    layer = vgg_block(layer, 128, 2)
-    layer = vgg_block(layer, 256, 2)
-    layer = vgg_block(layer, 512, 3)
-    layer = vgg_block(layer, 512, 3)
+    i = Input(shape=(IMG_SIZE,IMG_SIZE,3))
+    layer = Conv2D(64, (3,3), kernel_initializer='he_uniform', padding='same', activation='relu')(i)
+    layer = Conv2D(64, (3,3), kernel_initializer='he_uniform', padding='same', activation='relu')(layer)
+    layer = MaxPooling2D((2,2), strides=(2,2))(layer)
+    layer = Conv2D(128, (3,3), kernel_initializer='he_uniform', padding='same', activation='relu')(layer)
+    layer = Conv2D(128, (3,3), kernel_initializer='he_uniform', padding='same', activation='relu')(layer)
+    layer = MaxPooling2D((2,2), strides=(2,2))(layer)
+    layer = Conv2D(256, (3,3), kernel_initializer='he_uniform', padding='same', activation='relu')(layer)
+    layer = Conv2D(256, (3,3), kernel_initializer='he_uniform', padding='same', activation='relu')(layer)
+    layer = Conv2D(256, (3,3), kernel_initializer='he_uniform', padding='same', activation='relu')(layer)
+    layer = MaxPooling2D((2,2), strides=(2,2))(layer)
+    layer = Conv2D(512, (3,3), kernel_initializer='he_uniform', padding='same', activation='relu')(layer)
+    layer = Conv2D(512, (3,3), kernel_initializer='he_uniform', padding='same', activation='relu')(layer)
+    layer = Conv2D(512, (3,3), kernel_initializer='he_uniform', padding='same', activation='relu')(layer)
+    layer = MaxPooling2D((2,2), strides=(2,2))(layer)
+    layer = Conv2D(512, (3,3), kernel_initializer='he_uniform', padding='same', activation='relu')(layer)
+    layer = Conv2D(512, (3,3), kernel_initializer='he_uniform', padding='same', activation='relu')(layer)
+    layer = Conv2D(512, (3,3), kernel_initializer='he_uniform', padding='same', activation='relu')(layer)
+    layer = MaxPooling2D((2,2), strides=(2,2))(layer)
     layer = Flatten()(layer)
     layer = Dense(4096, activation='relu')(layer)
     layer = Dense(4096, activation='relu')(layer)
     layer = Dense(4, activation='softmax')(layer)
-    model = Model(inputs=visible, outputs=layer)
+    model = Model(inputs=i, outputs=layer)
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-    
     return model
+  
   
   # define model
 modelGo = createModel()
