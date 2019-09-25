@@ -47,7 +47,7 @@ plt.rcParams['ytick.labelright']= True
 plt.rcParams['ytick.left']      = False
 plt.rcParams['ytick.labelleft'] = False
 plt.rcParams['font.family']     = 'Arial'
-modelname = 'pre-3'
+modelname = 'pre-4'
 seed = 7
 np.random.seed(seed)
 

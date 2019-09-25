@@ -37,7 +37,7 @@ batch_size = 32
 IMG_SIZE = 300
 seed = 7
 np.random.seed(seed)
-modelname = 'pre-3'
+modelname = 'pre-4'
 
 def implt(img):
     plt.figure()
@@ -84,7 +84,8 @@ def createModel():
     model.add(BatchNormalization())
     model.add(Dropout(0.2))
     model.add(Flatten())
-    model.add(Dense(128, activation='relu'))#model.add(Dropout(0.3))
+    model.add(Dense(128, activation='relu'))
+    model.add(Dropout(0.3))
     model.add(Dense(128, activation='relu'))
     model.add(Dense(4, activation = 'softmax'))
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
