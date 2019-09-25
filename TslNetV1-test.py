@@ -37,7 +37,7 @@ batch_size = 32
 IMG_SIZE = 300
 seed = 7
 np.random.seed(seed)
-modelname = 'pre-3'
+modelname = 'TslNetV1'
 
 def implt(img):
     plt.figure()
