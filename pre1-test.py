@@ -37,7 +37,7 @@ batch_size = 32
 IMG_SIZE = 300
 seed = 7
 np.random.seed(seed)
-modelname = 'pre-2'
+modelname = 'pre-3'
 
 def implt(img):
     plt.figure()
@@ -67,19 +67,19 @@ print(loss_epoch_file)
 #---- model creation code
 def createModel():
     model = Sequential()
-    model.add(Conv2D(64, kernel_size = (3, 3), activation='relu', input_shape=(IMG_SIZE, IMG_SIZE, 3)))
+    model.add(Conv2D(64, kernel_size = (3, 3), padding='same', activation='relu', input_shape=(IMG_SIZE, IMG_SIZE, 3)))
     model.add(MaxPooling2D(pool_size=(2,2)))
     model.add(BatchNormalization())
-    model.add(Conv2D(128, kernel_size=(3,3), activation='relu'))
+    model.add(Conv2D(128, kernel_size=(3,3), padding='same', activation='relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
     model.add(BatchNormalization())
-    model.add(Conv2D(128, kernel_size=(3,3), activation='relu'))
+    model.add(Conv2D(128, kernel_size=(3,3), padding='same', activation='relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
     model.add(BatchNormalization())
-    model.add(Conv2D(192, kernel_size=(3,3), activation='relu'))
+    model.add(Conv2D(192, kernel_size=(3,3), padding='same', activation='relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
     model.add(BatchNormalization())
-    model.add(Conv2D(64, kernel_size=(3,3), activation='relu'))
+    model.add(Conv2D(64, kernel_size=(3,3), padding='same', activation='relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
     model.add(BatchNormalization())
     model.add(Dropout(0.2))
