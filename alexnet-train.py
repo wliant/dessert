@@ -69,13 +69,13 @@ callbacks_list  = [checkpoint,csv_logger]
 #---- model creation code
 def createModel():
     visible = Input(shape=(IMG_SIZE,IMG_SIZE,3))
-    layer = Conv2D(96, 11, 4, activation='relu')(visible)
+    layer = Conv2D(96, 11, 4, kernel_initializer='random_uniform', activation='relu')(visible)
     layer = MaxPooling2D((3,3), 2)(layer)
-    layer = Conv2D(256, 5, activation='relu', padding='same')(layer)
+    layer = Conv2D(256, 5, kernel_initializer='random_uniform', activation='relu', padding='same')(layer)
     layer = MaxPooling2D((3,3), 2)(layer)
-    layer = Conv2D(384, 3, activation='relu', padding='same')(layer)
-    layer = Conv2D(384, 3, activation='relu', padding='same')(layer)
-    layer = Conv2D(256, 3, activation='relu', padding='same')(layer)
+    layer = Conv2D(384, 3, kernel_initializer='random_uniform', activation='relu', padding='same')(layer)
+    layer = Conv2D(384, 3, kernel_initializer='random_uniform', activation='relu', padding='same')(layer)
+    layer = Conv2D(256, 3, kernel_initializer='random_uniform', activation='relu', padding='same')(layer)
     layer = MaxPooling2D((3,3), 2)(layer)
     layer = Flatten()(layer)
     layer = Dense(4096, activation='relu')(layer)
