@@ -67,7 +67,7 @@ def TslNetV3(input_shape, no_of_class):
     layer = Dense(1024, activation='relu')(layer)
     layer = Dense(1024, activation='relu')(layer)
     layer = Dense(no_of_class, activation='softmax')(layer)
-    model = Model(inputs=visible, output=layer)
+    model = Model(inputs=visible, outputs=layer)
     return model
 
 # Add Batch Norm
@@ -97,7 +97,7 @@ def TslNetV4(input_shape, no_of_class):
     layer = Dense(1024, activation='relu')(layer)
     layer = Dense(1024, activation='relu')(layer)
     layer = Dense(no_of_class, activation='softmax')(layer)
-    model = Model(inputs=visible, output=layer)
+    model = Model(inputs=visible, outputs=layer)
     return model
 
 
@@ -123,7 +123,7 @@ def TslNetV5(input_shape, no_of_class):
     layer = Dense(1024, activation='relu')(layer)
     layer = Dense(1024, activation='relu')(layer)
     layer = Dense(no_of_class, activation='softmax')(layer)
-    model = Model(inputs=visible, output=layer)
+    model = Model(inputs=visible, outputs=layer)
     return model
 
 # Add Image Augmentation
@@ -148,7 +148,7 @@ def TslNetV6(input_shape, no_of_class):
     layer = Dense(1024, activation='relu')(layer)
     layer = Dense(1024, activation='relu')(layer)
     layer = Dense(no_of_class, activation='softmax')(layer)
-    model = Model(inputs=visible, output=layer)
+    model = Model(inputs=visible, outputs=layer)
     return model
 
 # Inception Module + Reduction
@@ -173,7 +173,7 @@ def TslNetV7(input_shape, no_of_class):
     layer = Dense(1024, activation='relu')(layer)
     layer = Dense(1024, activation='relu')(layer)
     layer = Dense(no_of_class, activation='softmax')(layer)
-    model = Model(inputs=visible, output=layer)
+    model = Model(inputs=visible, outputs=layer)
     return model
 
 # Add Skip Connections
@@ -198,5 +198,5 @@ def TslNetV8(input_shape, no_of_class):
     layer = Dense(1024, activation='relu')(layer)
     layer = Dense(1024, activation='relu')(layer)
     layer = Dense(no_of_class, activation='softmax')(layer)
-    model = Model(inputs=visible, output=layer)
+    model = Model(inputs=visible, outputs=layer)
     return model
