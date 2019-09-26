@@ -19,7 +19,7 @@ val_folder = '../uncropped/validate'
 output_folder = 'output'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
 batch_size = 32
-IMG_SIZE = 300
+IMG_SIZE = 150
 seed = 7
 np.random.seed(seed)
 modelname = 'TslNetV1'
