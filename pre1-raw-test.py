@@ -37,7 +37,7 @@ batch_size = 32
 IMG_SIZE = 300
 seed = 7
 np.random.seed(seed)
-modelname = 'pre-doubleconv'
+modelname = 'pre-doubleconv-addlayers'
 
 def implt(img):
     plt.figure()
@@ -82,8 +82,11 @@ def createModel():
     model.add(Conv2D(96, kernel_size=(3,3), padding='same', activation='relu'))
     model.add(Conv2D(96, kernel_size=(3,3), padding='same', activation='relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
+    model.add(Conv2D(96, kernel_size=(3,3), padding='same', activation='relu'))
+    model.add(Conv2D(96, kernel_size=(3,3), padding='same', activation='relu'))
+    model.add(MaxPooling2D(pool_size=(2,2)))
     model.add(Flatten())
-    model.add(Dense(128, activation='relu'))
+    model.add(Dense(256, activation='relu'))
     model.add(Dense(128, activation='relu'))
     model.add(Dense(4, activation = 'softmax'))
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
