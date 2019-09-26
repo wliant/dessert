@@ -40,7 +40,7 @@ csv_logger      = CSVLogger(os.path.join(output_folder, modelname +'.csv'))
 callbacks_list  = [checkpoint,csv_logger]
   
   # define model
-model = TslNetV1((IMG_SIZE,IMG_SIZE,3), 4)
+model = TslNetV1(input_shape=(IMG_SIZE,IMG_SIZE,3), no_of_class=4)
 model.summary()
 
 from tensorflow.keras.utils import plot_model

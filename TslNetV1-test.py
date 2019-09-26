@@ -42,7 +42,7 @@ loss_epoch_file = os.path.join(output_folder, modelname +'.csv')
 plt_file = os.path.join(output_folder, modelname + '_plot.png')
   
   # define model
-modelGo = createModel()
+modelGo = TslNetV1(input_shape=(IMG_SIZE,IMG_SIZE,3), no_of_class=4)
 modelGo.load_weights(filepath)
 modelGo.compile(loss='categorical_crossentropy', 
                 optimizer='adam', 
