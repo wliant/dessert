@@ -10,7 +10,7 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator, array_to_im
 from TslModel import TslNetV4
 
 test_folder = '../cropped/test'
-output_folder = 'output'
+output_folder = 'output-tsl'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
 batch_size = 32
 IMG_SIZE = 300

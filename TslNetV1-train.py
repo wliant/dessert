@@ -9,7 +9,7 @@ from TslModel import TslNetV1
 # ----- declare some constant
 train_folder = '../uncropped/train'
 val_folder = '../uncropped/validate'
-output_folder = 'output'
+output_folder = 'output-tsl'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
 batch_size = 32
 train_epoch = 50
