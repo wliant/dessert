@@ -45,32 +45,29 @@ def TslNetV2(input_shape, no_of_class):
     model = Model(inputs=visible, outputs=layer)
     return model
 
-# Add more layers, increase input size
+#Add Batch Norm
 def TslNetV3(input_shape, no_of_class):
     visible = Input(shape=input_shape)
     layer = Conv2D(32, (3,3), padding='same', activation='relu')(visible)
     layer = Conv2D(32, (3,3), padding='same', activation='relu')(layer)
     layer = MaxPooling2D((2,2), strides=(2,2))(layer)
+    layer = BatchNormalization()(layer)
     layer = Conv2D(64, (3,3), padding='same', activation='relu')(layer)
     layer = Conv2D(64, (3,3), padding='same', activation='relu')(layer)
     layer = MaxPooling2D((2,2), strides=(2,2))(layer)
-    layer = Conv2D(128, (3,3), padding='same', activation='relu')(layer)
-    layer = Conv2D(128, (3,3), padding='same', activation='relu')(layer)
+    layer = BatchNormalization()(layer)
+    layer = Conv2D(96, (3,3), padding='same', activation='relu')(layer)
+    layer = Conv2D(96, (3,3), padding='same', activation='relu')(layer)
     layer = MaxPooling2D((2,2), strides=(2,2))(layer)
-    layer = Conv2D(256, (3,3), padding='same', activation='relu')(layer)
-    layer = Conv2D(256, (3,3), padding='same', activation='relu')(layer)
-    layer = MaxPooling2D((2,2), strides=(2,2))(layer)
-    layer = Conv2D(512, (3,3), padding='same', activation='relu')(layer)
-    layer = Conv2D(512, (3,3), padding='same', activation='relu')(layer)
-    layer = MaxPooling2D((2,2), strides=(2,2))(layer)
+    layer = BatchNormalization()(layer)
     layer = Flatten()(layer)
-    layer = Dense(1024, activation='relu')(layer)
-    layer = Dense(1024, activation='relu')(layer)
+    layer = Dense(128, activation='relu')(layer)
+    layer = Dense(128, activation='relu')(layer)
     layer = Dense(no_of_class, activation='softmax')(layer)
     model = Model(inputs=visible, outputs=layer)
     return model
 
-# Add Batch Norm
+#Add Dropout
 def TslNetV4(input_shape, no_of_class):
     visible = Input(shape=input_shape)
     layer = Conv2D(32, (3,3), padding='same', activation='relu')(visible)
@@ -101,7 +98,7 @@ def TslNetV4(input_shape, no_of_class):
     return model
 
 
-# Add Dropout
+# more layers
 def TslNetV5(input_shape, no_of_class):
     visible = Input(shape=input_shape)
     layer = Conv2D(32, (3,3), padding='same', activation='relu')(visible)
