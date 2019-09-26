@@ -4,52 +4,25 @@ import matplotlib.pyplot as plt
 
 
 from tensorflow.keras.callbacks import ModelCheckpoint,CSVLogger,LearningRateScheduler
+from TslModel import TslNetV1
 from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Input
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.layers import Flatten
-from tensorflow.keras.layers import Conv2D
-from tensorflow.keras.layers import Conv1D
-from tensorflow.keras.layers import Dropout
-from tensorflow.keras.layers import MaxPooling2D
-from tensorflow.keras.layers import MaxPooling1D
-from tensorflow.keras.layers import LSTM
-from tensorflow.keras.layers import BatchNormalization
-from tensorflow.keras.layers import Activation
-from tensorflow.keras.layers import AveragePooling2D
-from tensorflow.keras.layers import add
-from tensorflow.keras import regularizers
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras import optimizers
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
-from tensorflow.keras.models import Sequential
 import os
 
 # ----- declare some constant
 
 train_folder = '../uncropped/train'
 val_folder = '../uncropped/validate'
-
 output_folder = 'output'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
 batch_size = 32
 IMG_SIZE = 300
-
-def implt(img):
-    plt.figure()
-    plt.imshow(img)
-    plt.axis('off')
-
-plt.style.use('ggplot')     # if want to use the default style, set 'classic'
-plt.rcParams['ytick.right']     = True
-plt.rcParams['ytick.labelright']= True
-plt.rcParams['ytick.left']      = False
-plt.rcParams['ytick.labelleft'] = False
-plt.rcParams['font.family']     = 'Arial'
-modelname = 'pre-3'
 seed = 7
 np.random.seed(seed)
+modelname = 'TslNetV1'
 
 # .............................................................................
 datagen = ImageDataGenerator()
@@ -65,36 +38,11 @@ checkpoint      = ModelCheckpoint(filepath,
                             # Log the epoch detail into csv
 csv_logger      = CSVLogger(os.path.join(output_folder, modelname +'.csv'))
 callbacks_list  = [checkpoint,csv_logger]
-
-#---- model creation code
-def createModel():
-    model = Sequential()
-    model.add(Conv2D(64, kernel_size = (3, 3), activation='relu', padding='same', input_shape=(IMG_SIZE, IMG_SIZE, 3)))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(BatchNormalization())
-    model.add(Conv2D(128, kernel_size=(3,3), padding='same', activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(BatchNormalization())
-    model.add(Conv2D(128, kernel_size=(3,3), padding='same', activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(BatchNormalization())
-    model.add(Conv2D(192, kernel_size=(3,3), padding='same', activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(BatchNormalization())
-    model.add(Conv2D(64, kernel_size=(3,3), padding='same', activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(BatchNormalization())
-    model.add(Dropout(0.2))
-    model.add(Flatten())
-    model.add(Dense(128, activation='relu'))#model.add(Dropout(0.3))
-    model.add(Dense(128, activation='relu'))
-    model.add(Dense(4, activation = 'softmax'))
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-    return model
   
   # define model
-model = createModel()
+model = TslNetV1((IMG_SIZE,IMG_SIZE,3), 4)
 model.summary()
+
 from tensorflow.keras.utils import plot_model
 model_file = os.path.join(output_folder, modelname + "_model.png")
 plot_model(model, 

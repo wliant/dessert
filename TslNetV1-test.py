@@ -5,29 +5,10 @@ import matplotlib.pyplot as plt
 
 from tensorflow.keras.callbacks import ModelCheckpoint,CSVLogger,LearningRateScheduler
 from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Input
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.layers import Flatten
-from tensorflow.keras.layers import Conv2D
-from tensorflow.keras.layers import Conv1D
-from tensorflow.keras.layers import Dropout
-from tensorflow.keras.layers import MaxPooling2D
-from tensorflow.keras.layers import MaxPooling1D
-from tensorflow.keras.layers import LSTM
-from tensorflow.keras.layers import BatchNormalization
-from tensorflow.keras.layers import Activation
-from tensorflow.keras.layers import AveragePooling2D
-from tensorflow.keras.layers import add
-from tensorflow.keras import regularizers
-from tensorflow.keras.utils import to_categorical
-from tensorflow.keras.datasets import cifar10
 from tensorflow.keras import optimizers
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.applications.inception_v3 import InceptionV3
+from TslModel import TslNetV1
 import os
-
-
 
 test_folder = '../uncropped/validate'
 
@@ -37,7 +18,7 @@ batch_size = 32
 IMG_SIZE = 300
 seed = 7
 np.random.seed(seed)
-modelname = 'TslNetV1'
+modelname = 'pre-doubleconv-addlayers2'
 
 def implt(img):
     plt.figure()
@@ -59,36 +40,6 @@ test_it = datagen.flow_from_directory(test_folder, target_size=(IMG_SIZE,IMG_SIZ
 filepath        = os.path.join(output_folder, modelname + ".hdf5")
 loss_epoch_file = os.path.join(output_folder, modelname +'.csv')
 plt_file = os.path.join(output_folder, modelname + '_plot.png')
-
-print(filepath)
-print(loss_epoch_file)
-
-
-#---- model creation code
-def createModel():
-    model = Sequential()
-    model.add(Conv2D(64, kernel_size = (3, 3), padding='same', activation='relu', input_shape=(IMG_SIZE, IMG_SIZE, 3)))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(BatchNormalization())
-    model.add(Conv2D(128, kernel_size=(3,3), padding='same', activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(BatchNormalization())
-    model.add(Conv2D(128, kernel_size=(3,3), padding='same', activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(BatchNormalization())
-    model.add(Conv2D(192, kernel_size=(3,3), padding='same', activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(BatchNormalization())
-    model.add(Conv2D(64, kernel_size=(3,3), padding='same', activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(BatchNormalization())
-    model.add(Dropout(0.2))
-    model.add(Flatten())
-    model.add(Dense(128, activation='relu'))#model.add(Dropout(0.3))
-    model.add(Dense(128, activation='relu'))
-    model.add(Dense(4, activation = 'softmax'))
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-    return model
   
   # define model
 modelGo = createModel()
