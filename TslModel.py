@@ -24,7 +24,7 @@ def TslNetV1(input_shape, no_of_class):
     layer = Dense(no_of_class, activation='softmax')(layer)
 
     model = Model(inputs=visible, outputs=layer)
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    
     return model
     
 def TslNetV3(input_shape, no_of_class):
@@ -50,5 +50,4 @@ def TslNetV3(input_shape, no_of_class):
     layer = Dense(no_of_class, activation='softmax')(layer)
 
     model = Model(inputs=visible, output=layer)
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
