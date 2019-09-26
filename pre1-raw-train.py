@@ -69,15 +69,15 @@ callbacks_list  = [checkpoint,csv_logger]
 #---- model creation code
 def createModel():
     model = Sequential()
-    model.add(Conv2D(64, kernel_size = (3, 3), activation='relu', padding='same', input_shape=(IMG_SIZE, IMG_SIZE, 3)))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(Conv2D(128, kernel_size=(3,3), padding='same', activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(Conv2D(128, kernel_size=(3,3), padding='same', activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(Conv2D(192, kernel_size=(3,3), padding='same', activation='relu'))
+    model.add(Conv2D(32, kernel_size = (3, 3), activation='relu', padding='same', input_shape=(IMG_SIZE, IMG_SIZE, 3)))
     model.add(MaxPooling2D(pool_size=(2,2)))
     model.add(Conv2D(64, kernel_size=(3,3), padding='same', activation='relu'))
+    model.add(MaxPooling2D(pool_size=(2,2)))
+    model.add(Conv2D(64, kernel_size=(3,3), padding='same', activation='relu'))
+    model.add(MaxPooling2D(pool_size=(2,2)))
+    model.add(Conv2D(96, kernel_size=(3,3), padding='same', activation='relu'))
+    model.add(MaxPooling2D(pool_size=(2,2)))
+    model.add(Conv2D(96, kernel_size=(3,3), padding='same', activation='relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
     model.add(Flatten())
     model.add(Dense(128, activation='relu'))
@@ -97,4 +97,4 @@ plot_model(model,
            show_layer_names=False,
            rankdir='TB')
 # fit model
-model.fit_generator(train_it, validation_data=val_it,epochs=100,callbacks=callbacks_list)
+model.fit_generator(train_it, validation_data=val_it,epochs=50,callbacks=callbacks_list)
