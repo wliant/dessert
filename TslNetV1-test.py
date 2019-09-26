@@ -9,7 +9,7 @@ from tensorflow.keras.callbacks import ModelCheckpoint,CSVLogger,LearningRateSch
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 from TslModel import TslNetV1
 
-test_folder = '../uncropped/validate'
+test_folder = '../uncropped/test'
 output_folder = 'output'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
 batch_size = 32

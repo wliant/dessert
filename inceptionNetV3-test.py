@@ -29,7 +29,7 @@ import os
 
 
 
-test_folder = '../uncropped/validate'
+test_folder = '../cropped/test'
 
 output_folder = 'output'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]

@@ -28,8 +28,8 @@ from tensorflow.keras.applications.inception_v3 import InceptionV3
 import os
 
 
-train_folder = '../uncropped/train'
-val_folder = '../uncropped/validate'
+train_folder = '../cropped/train'
+val_folder = '../cropped/validate'
 
 output_folder = 'output'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
