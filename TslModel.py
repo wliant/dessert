@@ -10,6 +10,7 @@ from tensorflow.keras.layers import Lambda
 from tensorflow.keras.layers import MaxPooling2D
 from tensorflow.keras.layers import BatchNormalization
 from tensorflow.keras.layers import Activation
+from tensorflow.keras.layers import GlobalAveragePooling2D
 
 # Simple CNN
 def TslNetV1(input_shape, no_of_class):
@@ -250,27 +251,37 @@ def TslNetV7(input_shape, no_of_class):
     layer = Dense(no_of_class, activation='softmax')(layer)
     model = Model(inputs=visible, outputs=layer)
     return model
-# Add Skip Connections
+
+#global average pooling
 def TslNetV8(input_shape, no_of_class):
     visible = Input(shape=input_shape)
-    layer = Conv2D(32, (3,3), padding='same', activation='relu')(visible)
-    layer = Conv2D(32, (3,3), padding='same', activation='relu')(layer)
-    layer = MaxPooling2D((2,2), strides=(2,2))(layer)
-    layer = Conv2D(64, (3,3), padding='same', activation='relu')(layer)
-    layer = Conv2D(64, (3,3), padding='same', activation='relu')(layer)
-    layer = MaxPooling2D((2,2), strides=(2,2))(layer)
+    layer = ZeroPadding2D(padding=(3, 3))(visible)
+    layer = Conv2D(64, (7,7), padding='valid', kernel_initializer='he_normal', strides=(2,2), activation='relu')(layer)
+    layer = MaxPooling2D((3,3), strides=(2,2))(layer)
+    layer = BatchNormalization()(layer)
     layer = Conv2D(128, (3,3), padding='same', activation='relu')(layer)
     layer = Conv2D(128, (3,3), padding='same', activation='relu')(layer)
     layer = MaxPooling2D((2,2), strides=(2,2))(layer)
-    layer = Conv2D(256, (3,3), padding='same', activation='relu')(layer)
-    layer = Conv2D(256, (3,3), padding='same', activation='relu')(layer)
-    layer = MaxPooling2D((2,2), strides=(2,2))(layer)
-    layer = Conv2D(512, (3,3), padding='same', activation='relu')(layer)
-    layer = Conv2D(512, (3,3), padding='same', activation='relu')(layer)
-    layer = MaxPooling2D((2,2), strides=(2,2))(layer)
-    layer = Flatten()(layer)
-    layer = Dense(1024, activation='relu')(layer)
-    layer = Dense(1024, activation='relu')(layer)
+    layer = BatchNormalization()(layer)
+    layer = inception_resnet_block(layer, 128, output_shape=(37,37), scale=0.2, activation='relu')
+    layer = inception_resnet_block(layer, 128, output_shape=(37,37), scale=0.2, activation='relu')
+    layer = inception_resnet_block(layer, 128, output_shape=(37,37), scale=0.2, activation='relu')
+    layer = inception_resnet_block(layer, 128, output_shape=(37,37), scale=0.2, activation='relu')
+    layer = inception_resnet_block(layer, 128, output_shape=(37,37), scale=0.2, activation='relu')
+    layer = reduction_block(layer, 64, 64)
+    layer = inception_resnet_block(layer, 256, output_shape=(18,18), scale=0.2, activation='relu')
+    layer = inception_resnet_block(layer, 256, output_shape=(18,18), scale=0.2, activation='relu')
+    layer = inception_resnet_block(layer, 256, output_shape=(18,18), scale=0.2, activation='relu')
+    layer = inception_resnet_block(layer, 256, output_shape=(18,18), scale=0.2, activation='relu')
+    layer = inception_resnet_block(layer, 256, output_shape=(18,18), scale=0.2, activation='relu')
+    layer = reduction_block(layer, 128, 128)
+    layer = inception_resnet_block(layer, 512, output_shape=(8,8), scale=0.2, activation='relu')
+    layer = inception_resnet_block(layer, 512, output_shape=(8,8), scale=0.2, activation='relu')
+    layer = inception_resnet_block(layer, 512, output_shape=(8,8), scale=0.2, activation='relu')
+    layer = inception_resnet_block(layer, 512, output_shape=(8,8), scale=0.2, activation='relu')
+    layer = inception_resnet_block(layer, 512, output_shape=(8,8), scale=0.2, activation='relu')
+    layer = conv_block(layer, 1024, 1)
+    layer = GlobalAveragePooling2D(name='avg_pool')(layer)
     layer = Dense(no_of_class, activation='softmax')(layer)
     model = Model(inputs=visible, outputs=layer)
     return model

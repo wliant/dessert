@@ -21,9 +21,14 @@ weight_file = os.path.join(output_folder, modelname + ".hdf5")
 model_file = os.path.join(output_folder, modelname + "_model.png")
 
 #data preparation
-datagen = ImageDataGenerator()
-train_it = datagen.flow_from_directory(train_folder, shuffle=True, target_size=(IMG_SIZE,IMG_SIZE), class_mode='categorical', batch_size=batch_size)
-val_it = datagen.flow_from_directory(val_folder, shuffle=True, target_size=(IMG_SIZE,IMG_SIZE), class_mode='categorical', batch_size=batch_size)
+trainDataGen = ImageDataGenerator(width_shift_range=0.1,
+                             height_shift_range=0.1,
+                             rotation_range=20,
+                             horizontal_flip=True,
+                             vertical_flip=False)
+valDataGen = ImageDataGenerator()
+train_it = trainDataGen.flow_from_directory(train_folder, shuffle=True, target_size=(IMG_SIZE,IMG_SIZE), class_mode='categorical', batch_size=batch_size)
+val_it = valDataGen.flow_from_directory(val_folder, shuffle=True, target_size=(IMG_SIZE,IMG_SIZE), class_mode='categorical', batch_size=batch_size)
 
 #set up callback list
 checkpoint      = ModelCheckpoint(weight_file, 
