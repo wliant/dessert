@@ -12,7 +12,7 @@ val_folder = '../cropped/validate'
 output_folder = 'output-tsl'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
 batch_size = 32
-train_epoch = 50
+train_epoch = 75
 IMG_SIZE = 300
 seed = 7
 np.random.seed(seed)
