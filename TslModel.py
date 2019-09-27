@@ -95,7 +95,7 @@ def TslNetV4(input_shape, no_of_class):
     layer = Dropout(0.25)(layer)
     layer = Flatten()(layer)
     layer = Dense(64, activation='relu')(layer)
-    layer = Dropout(0.5)(layer)
+    layer = Dropout(0.25)(layer)
     layer = Dense(64, activation='relu')(layer)
     layer = Dense(no_of_class, activation='softmax')(layer)
     model = Model(inputs=visible, outputs=layer)
