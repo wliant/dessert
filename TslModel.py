@@ -90,14 +90,13 @@ def TslNetV4(input_shape, no_of_class):
     layer = MaxPooling2D((2,2), strides=(2,2))(layer)
     layer = BatchNormalization()(layer)
     layer = Conv2D(128, (3,3), padding='same', activation='relu')(layer)
-    layer = Dropout(0.1)(layer)
+    layer = Dropout(0.25)
     layer = MaxPooling2D((2,2), strides=(2,2))(layer)
     layer = BatchNormalization()(layer)
     layer = Flatten()(layer)
     layer = Dense(64, activation='relu')(layer)
     layer = Dropout(0.5)(layer)
     layer = Dense(64, activation='relu')(layer)
-    layer = Dropout(0.5)(layer)
     layer = Dense(no_of_class, activation='softmax')(layer)
     model = Model(inputs=visible, outputs=layer)
     return model
@@ -163,6 +162,8 @@ def TslNetV6(input_shape, no_of_class):
     layer = Dense(no_of_class, activation='softmax')(layer)
     model = Model(inputs=visible, outputs=layer)
     return model
+
+
 
 # Inception Module + Reduction
 def TslNetV7(input_shape, no_of_class):
