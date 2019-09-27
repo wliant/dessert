@@ -106,7 +106,6 @@ def TslNetV4(input_shape, no_of_class):
 # more layers
 def TslNetV5(input_shape, no_of_class):
     visible = Input(shape=input_shape)
-    layer = Dropout(0.15)(visible)
     layer = Conv2D(64, (3,3), padding='same', activation='relu')(layer)
     layer = Conv2D(64, (3,3), padding='same', activation='relu')(layer)
     layer = Conv2D(64, (3,3), padding='same', activation='relu')(layer)
