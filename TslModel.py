@@ -76,7 +76,8 @@ def TslNetV3(input_shape, no_of_class):
 #Add Dropout
 def TslNetV4(input_shape, no_of_class):
     visible = Input(shape=input_shape)
-    layer = Conv2D(32, (3,3), padding='same', activation='relu')(visible)
+    layer = Dropout(0.2)(visible)
+    layer = Conv2D(32, (3,3), padding='same', activation='relu')(layer)
     layer = MaxPooling2D((2,2), strides=(2,2))(layer)
     layer = BatchNormalization()(layer)
     layer = Conv2D(64, (3,3), padding='same', activation='relu')(layer)
@@ -91,10 +92,10 @@ def TslNetV4(input_shape, no_of_class):
     layer = Conv2D(128, (3,3), padding='same', activation='relu')(layer)
     layer = MaxPooling2D((2,2), strides=(2,2))(layer)
     layer = BatchNormalization()(layer)
-    layer = Dropout(0.25)(layer)
+    layer = Dropout(0.2)(layer)
     layer = Flatten()(layer)
     layer = Dense(64, activation='relu')(layer)
-    layer = Dropout(0.5)(layer)
+    layer = Dropout(0.2)(layer)
     layer = Dense(64, activation='relu')(layer)
     layer = Dense(no_of_class, activation='softmax')(layer)
     model = Model(inputs=visible, outputs=layer)
