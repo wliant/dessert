@@ -21,7 +21,11 @@ weight_file = os.path.join(output_folder, modelname + ".hdf5")
 model_file = os.path.join(output_folder, modelname + "_model.png")
 
 #data preparation
-datagen = ImageDataGenerator()
+datagen = ImageDataGenerator(width_shift_range=0.1,
+                             height_shift_range=0.1,
+                             rotation_range=20,
+                             horizontal_flip=True,
+                             vertical_flip=False)
 train_it = datagen.flow_from_directory(train_folder, shuffle=True, target_size=(IMG_SIZE,IMG_SIZE), class_mode='categorical', batch_size=batch_size)
 val_it = datagen.flow_from_directory(val_folder, shuffle=True, target_size=(IMG_SIZE,IMG_SIZE), class_mode='categorical', batch_size=batch_size)
 
