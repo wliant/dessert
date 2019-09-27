@@ -13,7 +13,7 @@ test_folder = '../cropped/test'
 output_folder = 'output-tsl'
 classes = ["cendol", "ice kachang", "tauhuay", "tausuan"]
 batch_size = 32
-IMG_SIZE = 300
+IMG_SIZE = 299
 seed = 7
 np.random.seed(seed)
 modelname = 'TslNetV6'
