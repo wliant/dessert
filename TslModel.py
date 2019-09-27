@@ -90,7 +90,7 @@ def TslNetV4(input_shape, no_of_class):
     layer = MaxPooling2D((2,2), strides=(2,2))(layer)
     layer = BatchNormalization()(layer)
     layer = Conv2D(128, (3,3), padding='same', activation='relu')(layer)
-    layer = Dropout(0.25)
+    layer = Dropout(0.25)(layer)
     layer = MaxPooling2D((2,2), strides=(2,2))(layer)
     layer = BatchNormalization()(layer)
     layer = Flatten()(layer)
