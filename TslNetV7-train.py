@@ -46,4 +46,4 @@ plot_model(model,
            rankdir='TB')
 
 # fit model
-model.fit_generator(train_it, validation_data=val_it,epochs=train_epoch,callbacks=callbacks_list)
+#model.fit_generator(train_it, validation_data=val_it,epochs=train_epoch,callbacks=callbacks_list)
