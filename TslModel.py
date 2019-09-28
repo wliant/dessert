@@ -11,6 +11,7 @@ from tensorflow.keras.layers import MaxPooling2D
 from tensorflow.keras.layers import BatchNormalization
 from tensorflow.keras.layers import Activation
 from tensorflow.keras.layers import GlobalAveragePooling2D
+from tensorflow.keras import regularizers
 
 # Simple CNN
 def TslNetV1(input_shape, no_of_class):
@@ -133,7 +134,7 @@ def TslNetV5(input_shape, no_of_class):
     layer = BatchNormalization()(layer)
     layer = Dropout(0.1)(layer)
     layer = Flatten()(layer)
-    layer = Dense(1024, activation='relu')(layer)
+    layer = Dense(1024, activation='relu', bias_regularizer=regularizers.l2(0.01))(layer)
     layer = Dropout(0.5)(layer)
     layer = Dense(1024, activation='relu')(layer)
     layer = Dropout(0.5)(layer)
@@ -171,6 +172,7 @@ def TslNetV6(input_shape, no_of_class):
     layer = Dense(1024, activation='relu')(layer)
     layer = Dropout(0.5)(layer)
     layer = Dense(1024, activation='relu')(layer)
+    layer = Dropout(0.5)(layer)
     layer = Dense(no_of_class, activation='softmax')(layer)
     model = Model(inputs=visible, outputs=layer)
     return model
