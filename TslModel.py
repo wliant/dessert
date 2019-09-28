@@ -32,7 +32,7 @@ def TslNetV1(input_shape, no_of_class):
     model = Model(inputs=visible, outputs=layer)
     return model
 
-# Simple CNN on cropped data
+# Simple CNN on cropped data, model no change
 def TslNetV2(input_shape, no_of_class):
     visible = Input(shape=input_shape)
     layer = Conv2D(32, (3,3), padding='same', activation='relu')(visible)
@@ -140,7 +140,7 @@ def TslNetV5(input_shape, no_of_class):
     model = Model(inputs=visible, outputs=layer)
     return model
 
-# Add Image Augmentation
+# Add Image Augmentation, model no change
 def TslNetV6(input_shape, no_of_class):
     visible = Input(shape=input_shape)
     layer = ZeroPadding2D(padding=(3, 3))(visible)
@@ -195,6 +195,8 @@ def inception_resnet_block(layer, filters, output_shape, scale, activation='relu
 
     concat = Concatenate()([left_branch, middle_branch, right_branch])
     branch_out = conv_block(concat, filters, 1, batchNorm=True, activation=False)
+
+    #skip connection
     layer = Lambda(
         lambda inputs, scale: inputs[0] + inputs[1] * scale,
         output_shape,
