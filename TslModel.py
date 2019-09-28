@@ -189,7 +189,7 @@ def conv_block(layer, filters, kernel_size, strides=1, padding='same', batchNorm
 def inception_resnet_block(layer, filters, output_shape, scale, activation='relu'):
     filters_start = int(filters/3)
     left_branch = conv_block(layer, filters_start, 1)
-    middle_branch = conv_block(layer, init, 1)
+    middle_branch = conv_block(layer, filters_start, 1)
     middle_branch = conv_block(middle_branch, filters_start, 3)
     right_branch = conv_block(layer, filters_start, 1)
     right_branch = conv_block(right_branch, int(filters_start*3/2), 3)
